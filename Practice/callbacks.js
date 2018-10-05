@@ -24,4 +24,8 @@ function goGetData(cb){
 }
 
 goGetData(myCallback);
+
+// test
+x = 3;
+
     
