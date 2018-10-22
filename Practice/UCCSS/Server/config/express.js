@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var logger = require('./logger');
 
@@ -12,7 +13,31 @@ module.exports = function (app, config) {
 
   app.use(morgan('dev'));
 
+  ///app.use(bodyParser.json());  on the slide but not copied in the video at 54:02
+  app.use(bodyParser.urlencoded({
+  extended: true
+  }));
+  
+
   app.use(express.static(config.root + '/public'));
+
+  require('../app/controllers/users')(app, config);
+  
+
+    function One(req, res, next){
+	    res.set('X-One','One');
+	    next();
+    };
+
+    function Two(req, res, next){
+	    res.set('X-Two','Two');
+	    next();
+    }
+
+    app.get('/willwork', [One, Two], function(req, res){
+	    res.send('Three');
+    });
+
 
   app.use(function (req, res) {
     logger.log('error', 'File not found');
