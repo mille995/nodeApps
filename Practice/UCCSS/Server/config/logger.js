@@ -1,4 +1,4 @@
-var winston = require('winston')
+var winston = require('winston');
 
 require('winston-daily-rotate-file');
 const logger = winston.createLogger({
