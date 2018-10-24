@@ -2,41 +2,83 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var logger = require('./logger');
+var mongoose = require('mongoose');
+var bluebird = require('bluebird');
+var glob = require('glob');
+
 
 module.exports = function (app, config) {
 
+  logger.log('info', "Loading Mongoose functionality");
+  mongoose.Promise = bluebird;
+  mongoose.connect(config.db);
+  var db = mongoose.connection;
+  db.on('error', function () {
+    throw new Error('unable to connect to database at ' + config.db);
+  });
+
+  // the if statement keeps messages from being logged to the console during testing
+  // because that can cause problems with test
+
+  if (process.env.NODE_ENV !== 'test') {
+    app.use(morgan('dev'));
+
+    mongoose.set('debug', true);
+    mongoose.connection.once('open', function callback() {
+      logger.log('info', 'Mongoose connected to the database');
+    });
+
     app.use(function (req, res, next) {
-    logger.log('info','Request from ' + req.connection.remoteAddress);
-    console.log("port: ", config.port)
+      logger.log('Request from ' + req.connection.remoteAddress, 'info');
+      next();
+    });
+  }
+
+
+  app.use(function (req, res, next) {
+    logger.log('info', 'Request from ' + req.connection.remoteAddress);
+    console.log("port: ", config.port);
     next();
-  });  
+  });
 
-  app.use(morgan('dev'));
-
-  ///app.use(bodyParser.json());  on the slide but not copied in the video at 54:02
   app.use(bodyParser.urlencoded({
-  extended: true
+    extended: true
   }));
-  
+
+  app.use(bodyParser.json());
 
   app.use(express.static(config.root + '/public'));
 
-  require('../app/controllers/users')(app, config);
-  
+  // loads all of the models regardless of how many there are
+  var models = glob.sync(config.root + '/app/models/*.js');
+  models.forEach(function (model) {
+    require(model);
+  });
 
-    function One(req, res, next){
-	    res.set('X-One','One');
-	    next();
-    };
+  // loads controllers that use the models above to access the database
+  var controllers = glob.sync(config.root + '/app/controllers/*.js');
+  controllers.forEach(function (controller) {
+    require(controller)(app, config);
+  });
 
-    function Two(req, res, next){
-	    res.set('X-Two','Two');
-	    next();
-    }
 
-    app.get('/willwork', [One, Two], function(req, res){
-	    res.send('Three');
-    });
+  // no longer used when the controllers above were added
+  //require('../app/controllers/users')(app, config);
+
+
+  function One(req, res, next) {
+    res.set('X-One', 'One');
+    next();
+  }
+
+  function Two(req, res, next) {
+    res.set('X-Two', 'Two');
+    next();
+  }
+
+  app.get('/willwork', [One, Two], function (req, res) {
+    res.send('Three');
+  });
 
 
   app.use(function (req, res) {
