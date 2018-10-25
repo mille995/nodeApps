@@ -1,3 +1,4 @@
+console.log('express.js');
 var express = require('express');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
@@ -54,16 +55,17 @@ module.exports = function (app, config) {
   models.forEach(function (model) {
     require(model);
   });
+  console.log('models in glob');
 
   // loads controllers that use the models above to access the database
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
   controllers.forEach(function (controller) {
     require(controller)(app, config);
   });
-
+  console.log('controllers in glob');
 
   // no longer used when the controllers above were added
-  //require('../app/controllers/users')(app, config);
+ // require('../app/controllers/users')(app, config);
 
 
   function One(req, res, next) {
@@ -99,3 +101,4 @@ module.exports = function (app, config) {
 
 };
 
+console.log('bottom_express.js');

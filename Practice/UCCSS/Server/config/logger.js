@@ -1,3 +1,4 @@
+console.log('logger.js');
 var winston = require('winston');
 
 require('winston-daily-rotate-file');
@@ -35,3 +36,4 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = logger;
        
+console.log('bottom_logger.js');

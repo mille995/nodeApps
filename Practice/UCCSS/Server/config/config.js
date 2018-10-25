@@ -1,3 +1,4 @@
+console.log('top_config.js');
 var path = require('path'),
     rootPath = path.normalize(__dirname + '/..'),
     env = process.env.NODE_ENV || 'development';
@@ -30,3 +31,4 @@ var config = {
 
 
 module.exports = config[env];
+console.log('bottom_config.js');

@@ -1,15 +1,17 @@
+console.log('models/users.js')
 var Mongoose = require('mongoose');
 var Schema = Mongoose.Schema;
 
-var mySchema = new Schema({
+var userSchema = new Schema({
     firstname: { type: String, require: true },
-    lastname: { type: String, require: true },
-    active: {type: Boolean, default: true},
-    dateRegistered: { type: Date, require: true, default: Date.now },
-    role: {type: String, enum: ['admin', 'user', 'staff']},
+    lastname: { type: String, require: true},
+    active: {type: Boolean, require: true, default: true},
+    role: {type: String, require: true, enum: [admin, user, staff]},
     email: {type: String, require: true, unique: true},
-    password: {type: String, require: true }
-});
-      
-
-module.exports = Mongoose.model('MyModel', mySchema);
+    passsword: {type: String, require: true},
+    dateRegistered: { type: Date, default: Date.now }
+  });
+  
+  module.exports = Mongoose.model('User', userSchema);
+  
+  console.log('bottom_models/users.js')
