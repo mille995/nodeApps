@@ -4,9 +4,7 @@ var express = require('express'),
     router = express.Router(),
     logger = require('../../config/logger'),
     mongoose = require('mongoose'),
-
-    // see the models / users.js file for the model
-    User = (mongoose.model('User')); // uppercase is the model (vs. the instance)
+    User = mongoose.model('User'); // uppercase is the model (vs. the instance)
 
 module.exports = function (app, config) {
     app.use('/api', router);
@@ -23,7 +21,7 @@ module.exports = function (app, config) {
         res.status(200).json({ message: 'Get user ' + req.params.id });
     });
 
-    router('/users').post(function (req, res, next) {
+    router.route('/users').post(function (req, res, next) {
         logger.log('Create User', 'verbose');
         var user = new User(req.body);
         user.save()
@@ -35,8 +33,8 @@ module.exports = function (app, config) {
             });
     })
 
-    var obj = { 'email': email, 'password': password };
-    res.status(201).json(obj);
+    // var obj = { 'email': email, 'password': password };
+    // res.status(201).json(obj);
 };
 
 console.log("bottom/controllers_users.js");
