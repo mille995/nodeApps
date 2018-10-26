@@ -5,3 +5,50 @@
 {"level":"info","message":"Loading Mongoose functionality"}
 {"level":"info","message":"HTTP Server listening on port: %d, in %s mode"}
 {"level":"info","message":"Mongoose connected to the database"}
+{"level":"info","message":"Loading Mongoose functionality"}
+{"level":"info","message":"HTTP Server listening on port: %d, in %s mode"}
+{"level":"info","message":"Mongoose connected to the database"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Creating user"}
+{"level":"info","message":"Loading Mongoose functionality"}
+{"level":"info","message":"HTTP Server listening on port: %d, in %s mode"}
+{"level":"info","message":"Mongoose connected to the database"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get all users"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get all users"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get all users"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get all users"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get all users"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get all users"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get all users"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get all users"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get all users"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get all users"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get all users"}
+{"level":"info","message":"Request from ::1"}
+{"level":"error","message":"File not found"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get user %s"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Updating user"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Request from ::1"}
+{"level":"error","message":"File not found"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get user %s"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get all users"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Deleting user %s"}
