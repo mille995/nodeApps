@@ -50,14 +50,15 @@ module.exports = function (app, config) {
 
   app.use(express.static(config.root + '/public'));
 
-  // loads all of the models regardless of how many there are
+  // loads all of the models from app/models regardless of how many files there are
   var models = glob.sync(config.root + '/app/models/*.js');
   models.forEach(function (model) {
     require(model);
   });
   console.log('models in glob');
 
-  // loads controllers that use the models above to access the database
+  // loads all of the controllers in app/controllers regardless of how many files there are
+
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
   controllers.forEach(function (controller) {
     require(controller)(app, config);
