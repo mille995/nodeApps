@@ -1,28 +1,33 @@
 // contains static configuration data
 // e.g., project name, path, environments, port, encryption keys
 
-var path = require('path'),    
-       rootPath = path.normalize(__dirname + '/..'),    
-       env = process.env.NODE_ENV || 'development';
+var path = require('path'),
+    rootPath = path.normalize(__dirname + '/..'),
+    env = process.env.NODE_ENV || 'development';
 
-var config = {  
-       development: {    
-                   root: rootPath,    
-                   app: {      name: 'UCCSSNEW'    },    
-                   port: 5000,  
-        },  
+var config = {
+    development: {
+        root: rootPath,
+        app: { name: 'UCCSSNEW' },
+        port: 5000,
+        db: 'mongodb://127.0.0.1/helpMe-dev'
+    },
 
-        test: {
-            root: rootPath,
-            app: { name: 'UCCSSNEW' },
-            port: 4000,
-            },
-            
-        production: {    
-                     root: rootPath,    
-                     app: {      name: 'UCCSSNEW'    },    
-                      port: 80,  }
-         };
+    test: {
+        root: rootPath,
+        app: { name: 'UCCSSNEW' },
+        port: 4000,
+        db: 'mongodb://127.0.0.1/helpMe-test'
+    },
+
+    production: {
+        root: rootPath,
+        app: { name: 'UCCSSNEW' },
+        port: 80,
+        db: 'mongodb://127.0.0.1/helpMe'
+    }
+
+};
 
 module.exports = config[env];  // square bracket notation to access properties of config
 
