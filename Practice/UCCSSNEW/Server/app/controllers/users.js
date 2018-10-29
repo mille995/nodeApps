@@ -16,4 +16,14 @@ module.exports = function (app, config) {
 		res.status(200).json({ message: 'Get user ' + req.params.id });
 	});
 
+	router.post('/login', function (req, res, next) {
+		console.log(req.body);
+		var email = req.body.email
+		var password = req.body.password;
+
+		var obj = { 'email': email, 'password': password };
+		res.status(201).json(obj);
+	});
+
+
 };  
