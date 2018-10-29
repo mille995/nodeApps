@@ -19,7 +19,7 @@ module.exports = function (app, config) {
 		})
 	}));
 
-	// get a user
+	// get a user with ID
 	router.get('/users/:id', asyncHandler(async (req, res) => {
 		logger.log('info', 'Get user %s', req.params.id);
 		await User.findById(req.params.id).then(result => {

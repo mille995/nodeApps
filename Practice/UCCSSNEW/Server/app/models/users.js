@@ -9,7 +9,7 @@ var userSchema = new Schema({
     active: {type: Boolean, require: true, default: true},
     role: {type: String, require: true, enum: ['admin', 'user', 'staff']},
     email: {type: String, require: true, unique: true},
-    passsword: {type: String, require: true},
+    password: {type: String, require: true},
     dateRegistered: { type: Date, default: Date.now }
   });
   
