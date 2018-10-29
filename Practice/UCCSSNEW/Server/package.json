@@ -9,6 +9,7 @@
   "author": "Joyce Miller",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "grunt": "^1.0.3",
     "grunt-contrib-jshint": "^2.0.0",
