@@ -1,10 +1,10 @@
 
 var express = require('express'),
-	router = express.Router(),  // create the express logger
+	router = express.Router(),  // create the express router
 	logger = require('../../config/logger');  //goes up to the server folder and comes back down
-mongoose = require('mongoose');
-User = mongoose.model('User');
-asyncHandler = require('express-async-handler');
+	mongoose = require('mongoose');
+	User = mongoose.model('User');
+	asyncHandler = require('express-async-handler');
 
 module.exports = function (app, config) {
 	app.use('/api', router);  // adds /api to every URL
