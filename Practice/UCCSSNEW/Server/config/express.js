@@ -3,17 +3,21 @@ var express = require('express');
 var morgan = require('morgan'); // used for logging
 var logger = require('./logger');  // in the same folder (config)
 var bodyParser = require('body-parser');
+var morgan = require('morgan');
 
 
 module.exports = function (app, config) {
     // app is the express object from express.js
     // config is the config option we import from the config file
 
-    app.use(function (req, res, next) {
-        logger.log('info', 'Request from ' + req.connection.remoteAddress);
-        console.log("port: ", config.port);
-        next();
-    });
+    if (process.env.NODE_ENV !== 'test') {
+        app.use(morgan('dev'));
+
+        app.use(function (req, res, next) {
+            logger.log('Request from ' + req.connection.remoteAddress, 'info');
+            next();
+        });
+    }
 
     // bodyParser parses out parameters in the URL and data from a form
     app.use(bodyParser.urlencoded({
