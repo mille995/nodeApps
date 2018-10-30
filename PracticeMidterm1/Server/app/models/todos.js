@@ -3,7 +3,7 @@
 var Mongoose = require('mongoose');
 var Schema = Mongoose.Schema;
 
-var todosSchema = new Schema({
+var todoSchema = new Schema({
     Todo: { type: String, require: true },
     Priority: {type: String, require: true, enum: ['Critical', 'High', 'Medium', 'Low']},
     DateDue: { type: Date, default: Date.now }
