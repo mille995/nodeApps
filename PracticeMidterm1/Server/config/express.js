@@ -1,4 +1,6 @@
 var express = require('express');
+var morgan = require('morgan');
+var logger = require('./logger');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');  // needed for database
 var bluebird = require('bluebird');  // needed for promises that mongoose uses
@@ -6,7 +8,7 @@ var bluebird = require('bluebird');  // needed for promises that mongoose uses
 module.exports = function (app, config) {
 
   // connect to the database
-  console.log( "Loading Mongoose functionality");
+  logger.log('info', "Loading Mongoose functionality");
   mongoose.Promise = bluebird;
   mongoose.connect(config.db);
   var db = mongoose.connection;
@@ -16,22 +18,20 @@ module.exports = function (app, config) {
 
   mongoose.set('debug', true); // log database actions
   mongoose.connection.once('open', function callback() {
-    console.log('info', 'Mongoose connected to the database');
+    logger.log('info', 'Mongoose connected to the database');
   });
 
   app.use(function (req, res, next) {
-    console.log('Request from ' + req.connection.remoteAddress);
+    logger.log('info', 'Request from ' + req.connection.remoteAddress);
     next();
   });
-
-
 
   // bodyParser parses out parameters in the URL and data from a form
   app.use(bodyParser.urlencoded({
     extended: true
   }));
 
- app.use(bodyParser.json());
+  app.use(bodyParser.json());
 
   app.use(express.static(config.root + '/public'));
 
@@ -39,12 +39,12 @@ module.exports = function (app, config) {
   require('../app/controllers/todos')(app, config);
 
 
-  console.log("Starting application");
+  logger.log('info', "Starting application");
 
   // ********* start error handling
 
   app.use(function (req, res) {
-    console.log('File not found');
+    logger.log('info', 'File not found');
     res.type('text/plan');
     res.status(404);
     res.send('404 Not Found');
@@ -59,6 +59,6 @@ module.exports = function (app, config) {
 
   // ********* end error handling
 
-  console.log('info', 'Starting application');
+  logger.log('info', 'Starting application');
 
 };
