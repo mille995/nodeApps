@@ -2,6 +2,7 @@ var express = require('express'),
 	router = express.Router(),  // create the express router
 	mongoose = require('mongoose');
 	Todo = mongoose.model('Todo');
+	logger = require('../../config/logger');  //goes up to the server folder and comes back down
 	asyncHandler = require('express-async-handler');
 
 module.exports = function (app, config) {
