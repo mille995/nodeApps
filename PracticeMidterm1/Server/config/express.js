@@ -24,10 +24,7 @@ module.exports = function (app, config) {
     next();
   });
 
-  app.use(function (req, res, next) {
-    console.log('Request from ' + req.connection.remoteAddress);
-    next();
-  });
+
 
   // bodyParser parses out parameters in the URL and data from a form
   app.use(bodyParser.urlencoded({
@@ -41,18 +38,6 @@ module.exports = function (app, config) {
   require('../app/models/todos');
   require('../app/controllers/todos')(app, config);
 
-  app.use(function (req, res) {
-    res.type('text/plan');
-    res.status(404);
-    res.send('404 Not Found');
-  });
-
-  app.use(function (err, req, res, next) {
-    console.error(err.stack);
-    res.type('text/plan');
-    res.status(500);
-    res.send('500 Sever Error');
-  });
 
   console.log("Starting application");
 
