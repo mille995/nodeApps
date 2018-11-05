@@ -17,6 +17,17 @@ module.exports = function (app, config) {
     // for static files
     app.use(express.static(config.root + '/public'));
 
+    // *** unit test data for unit testing - create an array of users and return the array to api/users
+    var users = [{ name: 'John', email: 'woo@hoo.com' },
+    { name: 'Betty', email: 'loo@woo.com' },
+    { name: 'Hal', email: 'boo@woo.com' }
+    ];
+
+    app.get('/api/users', function (req, res) {
+        res.status(200).json(users);
+    });
+    // *** unit test data for unit testing
+
 
     // *** error handling
     app.use(function (req, res) {
