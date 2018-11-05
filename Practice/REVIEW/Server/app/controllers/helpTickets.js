@@ -13,7 +13,7 @@ module.exports = function (app, config) {
     // create helpTickets
     router.post('/helpTickets', asyncHandler(async (req, res) => {
         logger.log('info', 'Creating helpTicket');
-        var user = new HelpTicket(req.body);
+        var helpTicket = new HelpTicket(req.body);
         const result = await helpTicket.save()
         res.status(201).json(result);
     }));
