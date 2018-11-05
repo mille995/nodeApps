@@ -2,7 +2,7 @@ var express = require('express'),
     router = express.Router(),
     logger = require('../../config/logger');
 mongoose = require('mongoose');
-bluebird = require('bluebird');
+User = mongoose.model('User');
 asyncHandler = require('express-async-handler');
 
 
