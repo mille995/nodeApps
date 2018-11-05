@@ -34,6 +34,11 @@
             "date": 1541428589450,
             "name": "log\\application-2018-11-05-08.log",
             "hash": "69e69f993d5a87f05d2999e63801389c"
+        },
+        {
+            "date": 1541445431062,
+            "name": "log\\application-2018-11-05-13.log",
+            "hash": "11712a0fad2532d5d7cc189c6b409c53"
         }
     ]
 }

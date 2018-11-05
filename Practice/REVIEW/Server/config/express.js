@@ -42,6 +42,13 @@ module.exports = function (app, config) {
     // for static files
     app.use(express.static(config.root + '/public'));
 
+    // parse inputs
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({
+        extended:true
+    }));
+
+
     // // require models and controllers -- only used without glob
     // require('../app/models/users');
     // require('../app/controllers/users')(app, config);
