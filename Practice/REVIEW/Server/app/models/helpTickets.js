@@ -5,7 +5,7 @@ var Schema = Mongoose.Schema;
 
 var HelpTicketContentSchema = new Schema({
     personId: {type: Schema.Types.ObjectId},
-    helpTicketID: {type: Schema.Types.ObjectId},
+    helpTicketId: {type: Schema.Types.ObjectId},
     content:{type: String},
     dateCreated: {type: Date, default: Date.now},
     file: {
@@ -21,7 +21,7 @@ var HelpTicketSchema = new Schema({
     personId: {type: Schema.Types.ObjectId},
     ownerId: {type: Schema.Types.ObjectId},
     status: {type: String, require: true, enum: ['new', 'inProcess', 'closed']},
-    dateCreate: {type: Date, default: Date.now},
+    dateCreated: {type: Date, default: Date.now},
 });
 
 
