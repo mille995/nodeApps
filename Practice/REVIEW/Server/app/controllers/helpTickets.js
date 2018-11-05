@@ -17,13 +17,13 @@ module.exports = function (app, config) {
         query.sort(req.query.order)
         // .populate({ path: 'personId', model: 'User', select: 'lastName firstName fullName' })
         // .populate({ path: 'ownerId', model: 'User', select: 'lastName firstName fullName' });
-        // if (req.query.status) {
-        //     if (req.query.status[0] == '-') {
-        //         query.where('status').ne(req.query.status.substring(1));
-        //     } else {
-        //         query.where('status').eq(req.query.status);
-        //     }
-        // }
+        if (req.query.status) {
+            if (req.query.status[0] == '-') {
+                query.where('status').ne(req.query.status.substring(1));
+            } else {
+                query.where('status').eq(req.query.status);
+            }
+        }
         await query.exec().then(result => {
             res.status(200).json(result);
         })
