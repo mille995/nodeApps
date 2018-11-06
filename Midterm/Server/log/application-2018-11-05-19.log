@@ -1,0 +1,29 @@
+{"level":"info","message":"Loading Mongoose functionality"}
+{"level":"info","message":"Starting application"}
+{"level":"info","message":"Mongoose connected to the database"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Creating user"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Creating user"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get all foos"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Updating foo"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Deleting foo %s"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get all foos"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Creating user"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get foo %s"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get all foos"}
+{"level":"info","message":"Request from ::1"}
+{"level":"info","message":"Get foo %s"}
