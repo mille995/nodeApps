@@ -27,3 +27,5 @@
 {"level":"info","message":"Get all foos"}
 {"level":"info","message":"Request from ::1"}
 {"level":"info","message":"Get foo %s"}
+{"level":"info","message":"Loading Mongoose functionality"}
+{"level":"info","message":"Starting application"}
