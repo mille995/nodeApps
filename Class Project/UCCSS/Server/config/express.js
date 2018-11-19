@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var bluebird = require('bluebird');
 var glob = require('glob');
+asyncHandler = require('express-async-handler');
 
 
 module.exports = function (app, config) {
