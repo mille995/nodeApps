@@ -1,4 +1,8 @@
 <template>
-    <h1>${message}</h1>   <!-- sting interpolator pulls text from the object into the html -->
-    <button click.trigger="logout()"> Logout </button>  <!-- links button to login() method in home.js-->
-</template>
+        <h1>${message}</h1>
+        <button click.trigger="newUser()">New User</button>
+
+         <compose show.bind="showUserEditForm" view="./components/editUser.html"></compose>  <!--works like an import for html-->
+
+    </template>
+    

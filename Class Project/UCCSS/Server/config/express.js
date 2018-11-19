@@ -6,9 +6,13 @@ var mongoose = require('mongoose');
 var bluebird = require('bluebird');
 var glob = require('glob');
 asyncHandler = require('express-async-handler');
+var cors = require('cors');
+cd
 
 
 module.exports = function (app, config) {
+
+    app.use(cors({origin: 'http://localhost:9000'}));
 
     // *** show the database is running
     logger.log('info', "Loading Mongoose functionality");

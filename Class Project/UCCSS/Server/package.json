@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.5.3",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-async-handler": "^1.1.4",
     "glob": "^7.1.3",
