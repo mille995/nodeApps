@@ -7,12 +7,9 @@ var bluebird = require('bluebird');
 var glob = require('glob');
 asyncHandler = require('express-async-handler');
 var cors = require('cors');
-cd
 
 
 module.exports = function (app, config) {
-
-    app.use(cors({origin: 'http://localhost:9000'}));
 
     // *** show the database is running
     logger.log('info', "Loading Mongoose functionality");
@@ -24,6 +21,7 @@ module.exports = function (app, config) {
     });
     // *** end show the database is running
 
+    app.use(cors({origin: 'http://localhost:9000'}));
 
     if (process.env.NODE_ENV !== 'test') {   // added 'if' statement for testing; dont write to console for test
         app.use(morgan('dev'));
