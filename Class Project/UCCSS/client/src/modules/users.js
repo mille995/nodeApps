@@ -12,6 +12,15 @@ export class Users {
     this.showUserEditForm = false;
   }
 
+  // activate runs when you first load the page
+  async activate(){
+    await this.getUsers();
+  }
+  
+  async getUsers(){
+    await this.users.getUsers();
+  }  
+
   newUser() {
     this.user = {
       firstName: "",

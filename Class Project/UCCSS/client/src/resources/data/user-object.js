@@ -16,4 +16,13 @@ export class User {
         }
     }
 
+    async getUsers() {
+        let response = await this.data.get(this.USER_SERVICE);
+        if (!response.error) {
+            this.usersArray = response;
+        } else {
+            this.usersArray = [];
+        }
+    }
+
 }
