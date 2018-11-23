@@ -41,6 +41,9 @@ export class Users {
     if (this.user && this.user.firstname && this.user.lastname
       && this.user.email && this.user.password)
       await this.users.saveUser(this.user);
+      await this.users.getUsers();
+      this.back();
+
   }
 
   back(){
