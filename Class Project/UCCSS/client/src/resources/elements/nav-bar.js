@@ -9,6 +9,14 @@ export class NavBar {
         this.email = "";
         this.password = "";
     }
+    // runs after the browser builds the html
+    // uses jQuery from bootstrap.  Makes menu items respond to clicks
+    attached() {
+        $('.navbar-nav a').on('click', function () {
+            $('.navbar-nav').find('li.active').removeClass('active');
+            $(this).parent('li').addClass('active');
+        });
+    }
 
     login() {
         console.log(this.email);
