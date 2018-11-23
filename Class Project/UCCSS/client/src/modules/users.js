@@ -16,7 +16,11 @@ export class Users {
   async activate(){
     await this.getUsers();
   }
-  
+
+  attached(){
+    feather.replace() // will draw feather icons
+  }
+
   async getUsers(){
     await this.users.getUsers();
   }  
