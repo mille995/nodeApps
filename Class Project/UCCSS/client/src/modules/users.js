@@ -38,11 +38,14 @@ export class Users {
   }
 
   async save() {
-    if (this.user && this.user.firstName && this.user.lastName
+    if (this.user && this.user.firstname && this.user.lastname
       && this.user.email && this.user.password)
       await this.users.saveUser(this.user);
   }
 
+  back(){
+    this.showUserEditForm = false;
+  }
 
 }
 
