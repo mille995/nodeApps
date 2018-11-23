@@ -8,8 +8,22 @@
 
         <!--Navigation Bar-->
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul show.bind="authenticated" class="navbar-nav">
 
+            <!--login form in the nav bar -->
+            <form show.bind="!authenticated" class="form-inline">
+                <div class="form-group mb-2">
+                    <label for="staticEmail2" class="sr-only">Email</label>
+                    <input type="text" class="form-control" id="staticEmail2" value="email@example.com">
+                </div>
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="inputPassword2" class="sr-only">Password</label>
+                    <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
+            </form>
+
+            <!--menu items in the nav bar-->
+            <ul show.bind="authenticated" class="navbar-nav">
                 <li class="nav-item active">
                     <a class="nav-link" href="#home">Home <span class="sr-only">(current)</span></a>
                 </li>

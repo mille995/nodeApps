@@ -4,7 +4,7 @@ import { Router } from 'aurelia-router';
 @inject(Router)
 export class NavBar {
     constructor(router) {
-        this.authenticated = true;
+        this.authenticated = false;
         this.router = router;
     }
 
