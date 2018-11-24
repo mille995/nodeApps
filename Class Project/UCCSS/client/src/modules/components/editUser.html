@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-8">
-                
+
                 <!-- toolbar at the top of the form -->
                 <div class="list-group-item">
                     <span click.trigger="back()"><i data-feather="arrow-left-circle"></i></span>
@@ -12,7 +12,7 @@
                     <span show.bind="user._id" click.trigger="delete()"><i data-feather="trash-2"></i></span>
                 </div>
 
-
+                <!-- edit user form -->
                 <div class="form-group" style="margin-top:20px;">
                     <label for="firstname">First name</label>
                     <input type="email" class="form-control" value.bind="user.firstname" id="firstname" placeholder="First name">
