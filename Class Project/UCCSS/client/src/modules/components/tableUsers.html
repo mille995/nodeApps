@@ -26,10 +26,15 @@
                     <!-- table content -->
                     <tbody>
                         <tr repeat.for="user of users.usersArray">
-                            <td>${user.firstname}</td>
-                            <td>${user.lastname}</td>
-                            <td>${user.role}</td>
-                            <td>${user.active}</td>
+                            <td click.trigger="editUser(user)">${user.firstname}</td> 
+                            <td click.trigger="editUser(user)">${user.lastname}</td>
+                            <td click.trigger="editUser(user)">${user.role}</td>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" change.delegate="changeActive(user)" checked.bind="user.active"
+                                    type="checkbox" value="" id="defaultCheck1">
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

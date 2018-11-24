@@ -13,17 +13,17 @@ export class Users {
   }
 
   // activate runs when you first load the page
-  async activate(){
+  async activate() {
     await this.getUsers();
   }
 
-  attached(){
+  attached() {
     feather.replace() // will draw feather icons
   }
 
-  async getUsers(){
+  async getUsers() {
     await this.users.getUsers();
-  }  
+  }
 
   newUser() {
     this.user = {
@@ -34,21 +34,43 @@ export class Users {
       email: "",
       password: ""
     }
+    this.openEditForm();
+  }
+
+  openEditForm() {
     this.showUserEditForm = true;
+    setTimeout(() => { $("#firstName").focus(); }, 500);
+  }
+
+  editUser(user) {
+    this.user = user;
+    this.openEditForm();
+  }
+
+  changeActive(user) {
+    this.user = user;
+    this.save();
   }
 
   async save() {
     if (this.user && this.user.firstname && this.user.lastname
       && this.user.email && this.user.password)
       await this.users.saveUser(this.user);
-      await this.users.getUsers();
-      this.back();
+    await this.users.getUsers();
+    this.back();
 
   }
 
-  back(){
+  back() {
     this.showUserEditForm = false;
   }
 
+  async delete() {
+    if (this.user) {
+      await this.users.delete(this.user);
+      await this.getUsers();
+      this.back();
+    }
+  }
 }
 
