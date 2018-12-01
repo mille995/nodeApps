@@ -4,7 +4,11 @@ var express = require('express'),
 mongoose = require('mongoose');
 User = mongoose.model('User');
 asyncHandler = require('express-async-handler');
+passportService = require('../../config/passport'),
+    passport = require('passport');
 
+var requireLogin = passport.authenticate('local', { session: false });
+var requireAuth = passport.authenticate('jwt', { session: false });
 
 module.exports = function (app, config) {
     app.use('/api', router);
@@ -14,14 +18,15 @@ module.exports = function (app, config) {
     //     res.status(200).json({ message: 'Got all users' });
     // });
 
-    router.post('/users', asyncHandler(async (req, res) => {
+    // Initial user setup does not have requireAuth 
+    router.post('/users', asyncHandler(async (req, res) => {  
         logger.log('info', 'Creating user');
         var user = new User(req.body);
         const result = await user.save()
         res.status(201).json(result);
-    }));
+    })); 
 
-    router.get('/users', asyncHandler(async (req, res) => {
+    router.get('/users', requireAuth, asyncHandler(async (req, res) => {
         logger.log('info', 'Get all users');
         let query = User.find();
         query.sort(req.query.order)
@@ -30,14 +35,14 @@ module.exports = function (app, config) {
         })
     }));
 
-    router.get('/users/:id', asyncHandler(async (req, res) => {
+    router.get('/users/:id', requireAuth, asyncHandler(async (req, res) => {
         logger.log('info', 'Get user %s', req.params.id);
         await User.findById(req.params.id).then(result => {
             res.status(200).json(result);
         })
     }));
 
-    router.put('/users', asyncHandler(async (req, res) => {
+    router.put('/users', requireAuth, asyncHandler(async (req, res) => {
         logger.log('info', 'Updating user');
         await User.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true })
             .then(result => {
@@ -45,10 +50,10 @@ module.exports = function (app, config) {
             })
     }));
 
-    router.put('/users/password/:userId', requireAuth, function (req, res, next) {
+    router.put('/users/password/:id', requireAuth, function (req, res, next) {
         logger.log('Update user ' + req.params.userId, 'verbose');
-        
-        await User.findById(req.params.userId)
+
+        User.findById(req.params.userId)
             .exec()
             .then(function (user) {
                 if (req.body.password !== undefined) {
@@ -68,7 +73,7 @@ module.exports = function (app, config) {
     });
 
 
-    router.delete('/users/:id', asyncHandler(async (req, res) => {
+    router.delete('/users/:id', requireAuth, asyncHandler(async (req, res) => {
         logger.log('info', 'Deleting user %s', req.params.id);
         await User.remove({ _id: req.params.id })
             .then(result => {
@@ -76,5 +81,6 @@ module.exports = function (app, config) {
             })
     }));
 
+    router.route('/users/login').post(requireLogin, login);
 
 };
