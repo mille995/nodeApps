@@ -45,6 +45,29 @@ module.exports = function (app, config) {
             })
     }));
 
+    router.put('/users/password/:userId', requireAuth, function (req, res, next) {
+        logger.log('Update user ' + req.params.userId, 'verbose');
+        
+        await User.findById(req.params.userId)
+            .exec()
+            .then(function (user) {
+                if (req.body.password !== undefined) {
+                    user.password = req.body.password;
+                }
+                user.save()
+                    .then(function (user) {
+                        res.status(200).json(user);
+                    })
+                    .catch(function (err) {
+                        return next(err);
+                    });
+            })
+            .catch(function (err) {
+                return next(err);
+            });
+    });
+
+
     router.delete('/users/:id', asyncHandler(async (req, res) => {
         logger.log('info', 'Deleting user %s', req.params.id);
         await User.remove({ _id: req.params.id })
