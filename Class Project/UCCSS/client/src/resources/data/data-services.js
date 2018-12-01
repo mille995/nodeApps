@@ -23,6 +23,8 @@ export class DataServices {
                 // interceptors run when a request is sent or received
                 .withInterceptor({
                     request(request) {
+                        var authHeader = 'Bearer ' + localStorage.getItem('aurelia_token')
+                        request.headers.append('Authorization', authHeader);
                         console.log('Requesting ${request.method} ${request.url}');
                         return request;
                     },
