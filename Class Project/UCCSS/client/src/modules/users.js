@@ -39,7 +39,8 @@ export class Users {
 
   openEditForm() {
     this.showUserEditForm = true;
-    setTimeout(() => { $("#firstName").focus(); }, 500);
+    setTimeout(() => { $("#firstname").focus(); }, 500);
+    // modified from the class value of firstName
   }
 
   editUser(user) {
