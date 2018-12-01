@@ -50,7 +50,7 @@ module.exports = function (app, config) {
             })
     }));
 
-    router.put('/users/password/:id', requireAuth, function (req, res, next) {
+    router.put('/users/password/:userId', requireAuth, function (req, res, next) {
         logger.log('Update user ' + req.params.userId, 'verbose');
 
         User.findById(req.params.userId)
