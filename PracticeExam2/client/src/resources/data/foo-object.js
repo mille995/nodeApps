@@ -9,6 +9,7 @@ export class Foo {
         this.FOO_SERVICE = 'foo';  // endpoint for the url /api/users
     }
 
+
     async saveFoo(foo) {
         let serverResponse;
         if (foo) {
@@ -21,7 +22,6 @@ export class Foo {
         }
     }
 
-
     async getFoos() {
         let response = await this.data.get(this.FOO_SERVICE);
         if (!response.error) {
@@ -30,6 +30,7 @@ export class Foo {
             this.foosArray = [];
         }
     }
+
 
     async delete(foo) {
         if (foo && foo._id) {

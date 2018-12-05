@@ -35,7 +35,7 @@ export class Foos {
 
   openEditForm() {
     this.showFooEditForm = true;
-    setTimeout(() => { $("#firstname").focus(); }, 500);
+    setTimeout(() => { $("#foo").focus(); }, 500);
     // modified from the class value of firstName
   }
 
@@ -50,14 +50,14 @@ export class Foos {
   }
 
   async save() {
-    if (this.foo && this.foo.foo && this.foo.woo)
-      await this.foo.saveFoo(this.foo);
-    await this.foo.getFoos();
+   if (this.foo && this.foo.foo && this.foo.woo)
+      await this.foos.saveFoo(this.foo);
+    await this.foos.getFoos();
     this.back();
 
   }
 
-  back() {
+    back() {
     this.showFooEditForm = false;
   }
 
