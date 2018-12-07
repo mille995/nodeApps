@@ -1,3 +1,5 @@
 <template>
-
-</template>
+            <h1>${message}</h1>
+             <compose show.bind="!showEditForm" view="./components/tableHelpTickets.html"></compose>
+             <compose show.bind="showEditForm" view="./components/editHelpTicket.html"></compose>
+    </template>
