@@ -1,3 +1,5 @@
+// configures base URL and logout page
+
 var authConfig = {
     baseUrl: "http://localhost:5000/api",
     loginUrl: '/users/login',
