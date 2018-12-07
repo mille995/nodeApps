@@ -28,7 +28,7 @@ export class App {
       },
 
       {
-        route: ['', 'helpTickets'],
+        route: 'helpTickets',
         moduleId: './modules/helpTickets',
         name: 'Help Tickets',
         auth: true 
