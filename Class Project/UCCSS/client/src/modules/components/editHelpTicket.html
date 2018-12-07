@@ -1,0 +1,53 @@
+<template>
+
+    <!-- set to 8 columns of 12 to not use the whole page -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+
+                <!-- toolbar at the top of the form -->
+                <div class="list-group-item">
+                    <span click.trigger="back()"><i data-feather="arrow-left-circle"></i></span>
+                    <span click.trigger="save()" style="margin-left:5px;"><i data-feather="save"></i></span>
+                    <span show.bind="helpTicket._id" click.trigger="delete()"><i data-feather="trash-2"></i></span>
+                </div>
+
+                <!-- edit user form -->
+                <div class="form-group" style="margin-top:20px;">
+                    <label for="title">Title</label>
+                    <input type="text" readonly.bind="helpTicket._id" class="form-control" value.bind="helpTicket.title"
+                        id="title" placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <input type="text" class="form-control" value.bind="helpTicket.status" id="status" placeholder="Status">
+                </div>
+                <div class="form-group">
+                    <label for="personId">Person</label>
+                    <input type="text" class="form-control" value.bind="helpTicket.personId" id="personId" placeholder="Person">
+                </div>
+                <div class="form-group">
+                    <label for="ownerId">Owner</label>
+                    <input type="text" class="form-control" value.bind="helpTicket.ownerId" id="ownerId" placeholder="Owner">
+                </div>
+                <div class="form-group">
+                    <label for="content">Description</label>
+                    <textarea value.bind="helpTicketContent.content" class="form-control" rows="8"></textarea>
+                </div>
+                <div class="card" repeat.for="content of helpTickets.helpTicketsContentsArray">
+                    <div class="card=body">
+                        <div class="row" style="padding:3px;">
+                            <div class="col-3">
+                                <span innerhtml.bind="content.dateCreated | formtDate"></span><br />
+                                ${content.personId.firstname} $content.personId.lastname}
+                            </div>
+                            <div class="col-9" style="border-left-style: solid;border-left-width:1px;">
+                                ${content.coontent}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
