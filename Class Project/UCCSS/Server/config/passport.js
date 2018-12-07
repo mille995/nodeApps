@@ -6,8 +6,10 @@ var passport = require('passport'),
     extractJwt = require('passport-jwt').ExtractJwt,
     localStrategy = require('passport-local');
 
+// use email as the username for login
 var localOptions = { usernameField: 'email' };
 
+// login authentication
 var localLogin = new localStrategy(localOptions, function (email, password, next) {
     User.findOne({ email: email }).exec()
         .then(function (user) {
@@ -45,16 +47,20 @@ setUserInfo = function (req) {
     };
 };
 
+// log in and generate a token
 login = function (req, res, next) {
     var userInfo = setUserInfo(req.user);
     res.status(200).json({ token: generateToken(userInfo), user: req.user });
 };
 
+// extracts the data from the token following login
 var jwtOptions = {
     jwtFromRequest: extractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: config.secret
 };
 
+// uses the payload from the token and extracts the _id field value
+// looks up the user and checks if it is valid
 var jwtLogin = new jwtStrategy(jwtOptions, function (payload, next) {
     User.findById(payload._id).exec()
         .then(function (user) {

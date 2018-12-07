@@ -18,6 +18,7 @@ module.exports = function (app, config) {
     //     res.status(200).json({ message: 'Got all users' });
     // });
 
+    // Create a user
     // Initial user setup does not have requireAuth 
     router.post('/users', asyncHandler(async (req, res) => {  
         logger.log('info', 'Creating user');
@@ -26,6 +27,7 @@ module.exports = function (app, config) {
         res.status(201).json(result);
     })); 
 
+    // Get all users
     router.get('/users', requireAuth, asyncHandler(async (req, res) => {
         logger.log('info', 'Get all users');
         let query = User.find();
@@ -35,6 +37,7 @@ module.exports = function (app, config) {
         })
     }));
 
+    // Get user by ID
     router.get('/users/:id', requireAuth, asyncHandler(async (req, res) => {
         logger.log('info', 'Get user %s', req.params.id);
         await User.findById(req.params.id).then(result => {
@@ -42,6 +45,7 @@ module.exports = function (app, config) {
         })
     }));
 
+    // update users
     router.put('/users', requireAuth, asyncHandler(async (req, res) => {
         logger.log('info', 'Updating user');
         await User.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true })
@@ -50,6 +54,7 @@ module.exports = function (app, config) {
             })
     }));
 
+    // update password
     router.put('/users/password/:userId', requireAuth, function (req, res, next) {
         logger.log('Update user ' + req.params.userId, 'verbose');
 
@@ -72,7 +77,7 @@ module.exports = function (app, config) {
             });
     });
 
-
+// delete a user
     router.delete('/users/:id', requireAuth, asyncHandler(async (req, res) => {
         logger.log('info', 'Deleting user %s', req.params.id);
         await User.remove({ _id: req.params.id })
