@@ -1,0 +1,39 @@
+<template>
+    <!-- set to 8 columns of 12 to not use the whole page -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+
+                <table class="table">
+                    <thead>
+                        <!-- toolbar at the top of the table -->
+                        <tr>
+                            <th colspan="4">
+                                <span click.trigger="newHelpTicket()"><i data-feather="plus"></i></span>
+                                <span click.trigger="getHelpTickets()" style="margin-left:5px;"><i data-feather="refresh-cw"></i></span>
+                            </th>
+                        </tr>
+
+                        <!-- table headings -->
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">User</th>
+                            <th scope="col">Owner</th>
+                        </tr>
+                    </thead>
+
+                    <!-- table content -->
+                    <tbody>
+                        <tr click.trigger="editHelpTicket(helpTicket)" repeat.for="helpTicket of helpTickets.helpTicketsArray">
+                            <td>${helpTicket.title}</td>
+                            <td>${helpTicket.status}</td>
+                            <td>${helpTicket.personId.firstname} ${helpTicket.personId.lastname} </td>
+                            <td>${helpTicket.ownerId.firstname} ${helpTicket.ownerId.lastname} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>
