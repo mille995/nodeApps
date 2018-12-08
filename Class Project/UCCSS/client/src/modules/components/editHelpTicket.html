@@ -34,6 +34,24 @@
                     <label for="content">Description</label>
                     <textarea value.bind="helpTicketContent.content" class="form-control" rows="8"></textarea>
                 </div>
+
+                <!--button to add new content to the helpticket-->
+                <div class="row">
+                    <div class="col-2">
+                        <label class="btn btn-primary">
+                            Browse for files&hellip; <input type="file" style="display: none;" change.delegate="changeFiles()"
+                                files.bind="files">
+                        </label>
+                    </div>
+                    <div class="col-10">
+                        <ul>
+                            <li repeat.for="file of filesToUpload" class="list-group-item">${file.name}<span
+                                    click.delegate="removeFile($index)" class="pull-right"></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!--helpticket content-->
                 <div class="card" repeat.for="content of helpTickets.helpTicketsContentsArray">
                     <div class="card=body">
                         <div class="row" style="padding:3px;">
@@ -43,6 +61,10 @@
                             </div>
                             <div class="col-9" style="border-left-style: solid;border-left-width:1px;">
                                 ${content.coontent}
+                            </div>
+                            <div>
+                                <a href="http://localhost:5000/uploadedFiles/helpTickets/${content.file.fileName}" 
+                                    target="_blank">${content.file.originalFileName}</a>
                             </div>
                         </div>
                     </div>
