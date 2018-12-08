@@ -7,6 +7,7 @@ export class HelpTicket {
     constructor(data) {
         this.data = data;
         this.HELP_TICKET_SERVICE = 'helpTickets';
+        this.HELP_TICKET_CONTENT_SERVICE = 'helpTicketContents'
         this.userObj = JSON.parse(sessionStorage.getItem('userObj'));
     }
 
@@ -32,7 +33,17 @@ export class HelpTicket {
             this.helpTicketsArray = [];
         }
     }
-
+    // get HelpTicketContent - new and working
+    async getHelpTicketContent(helpTicket) {
+        console.log(this.userObj.role)
+        let url = this.HELP_TICKET_CONTENT_SERVICE + '/helpTicket/' + helpTicket;
+        let response = await this.data.get(url);
+        if (!response.error) {
+            this.helpTicketsContentsArray = response;
+        } else {
+            this.helpTicketsContentsArray = [];
+        }
+    }
 
     // saveHelpTicket - put and post - slide 3 - deck 9
     async saveHelpTicket(helpTicket) {
