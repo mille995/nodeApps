@@ -7,18 +7,18 @@ export class HelpTicket {
     constructor(data) {
         this.data = data;
         this.HELP_TICKET_SERVICE = 'helpTickets';
+        this.userObj = JSON.parse(sessionStorage.getItem('userObj'));
     }
 
-    constructor(helpTicket){
-        this.helpTickets = 'helpTickets';
-        this.openEditForm = false;
-        this.userObj = JSON.parse(sessionStorage.getItem('userObj'));
-        }
-     
+    async uploadFile(files, id) {
+        await this.data.uploadFiles(files, this.HELP_TICKET_CONTENT_SERVICE + "/upload/" + id);
+    }
+
     async activate() {
         this.helpTickets.getHelpTickets(this.userObj);
     }
 
+    // getHelpTickets - slide 2 - deck 9
     async getHelpTickets(helpTicket) {
         console.log(this.userObj.role)
         let url = this.HELP_TICKET_SERVICE;
@@ -33,6 +33,8 @@ export class HelpTicket {
         }
     }
 
+
+    // saveHelpTicket - put and post - slide 3 - deck 9
     async saveHelpTicket(helpTicket) {
         let serverResponse;
         if (helpTicket) {
@@ -46,8 +48,8 @@ export class HelpTicket {
     }
 
     async delete(helpTicket) {
-        if (user && user._id) {
-            await this.data.delete(this.USER_SERVICE + '/' + user._id)
+        if (helpTicket && helpTicket._id) {
+            await this.data.delete(this.HELP_TICKET_SERVICE + '/' + helpTicket._id)
         }
     }
 }
