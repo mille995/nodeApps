@@ -7,8 +7,6 @@ HelpTicketContent = mongoose.model('HelpTicketContent')
 asyncHandler = require('express-async-handler');
 passportService = require('../../config/passport'),
     passport = require('passport');
-multer = require('multer');
-mkdirp = require('mkdirp');
 
 // need requireAuth but non requireLogin
 var requireAuth = passport.authenticate('jwt', { session: false });
@@ -91,14 +89,14 @@ module.exports = function (app, config) {
         logger.log('info', 'Creating HelpTicket');
         var helpTicket = new HelpTicket(req.body.helpTicket);
         await helpTicket.save()
-            .then(result => {
-                req.body.content.helpTicketId = result._id;
-                var helpTicketContent = new HelpTicketContent(req.body.content);
-                helpTicketContent.save()
-                    .then(content => {
-                        res.status(201).json(result);
-                    })
-            })
+        .then(result => {
+            req.body.content.helpTicketId = result._id;
+            var helpTicketContent = new HelpTicketContent(req.body.content);
+            helpTicketContent.save()
+                .then(content => {
+        res.status(201).json(result);
+                })
+        })
     }));
 
 
@@ -149,6 +147,6 @@ module.exports = function (app, config) {
 
 
 
-    }));
+}));
 
 };
