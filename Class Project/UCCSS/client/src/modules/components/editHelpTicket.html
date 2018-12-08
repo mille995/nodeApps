@@ -56,11 +56,11 @@
                     <div class="card=body">
                         <div class="row" style="padding:3px;">
                             <div class="col-3">
-                                <span innerhtml.bind="content.dateCreated | formtDate"></span><br />
+                                <span innerhtml.bind="content.dateCreated"></span><br />
                                 ${content.personId.firstname} $content.personId.lastname}
                             </div>
                             <div class="col-9" style="border-left-style: solid;border-left-width:1px;">
-                                ${content.coontent}
+                                ${content.content}
                             </div>
                             <div>
                                 <a href="http://localhost:5000/uploadedFiles/helpTickets/${content.file.fileName}" 
