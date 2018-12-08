@@ -58,6 +58,17 @@ module.exports = function (app, config) {
         })
     }));
 
+     // get helpTicketContents by helpTicket ID
+     router.get('/helpTicketContents/helpTicket/:helpTicketId', requireAuth, asyncHandler(async (req, res) => {
+        logger.log('info', 'Get helpTicket content for a helpticket');
+        console.log(req.params.helpTicketId);
+        let query = HelpTicketContent.find({ helpTicketId: req.params.helpTicketId });
+        await query.exec().then(result => {
+            res.status(200).json(result);
+        })
+    }));
+
+
 
     // Get helpTicket by ID
     router.get('/helpTickets/:id', requireAuth, asyncHandler(async (req, res) => {
@@ -102,7 +113,6 @@ module.exports = function (app, config) {
     }));
 
 
-
     // // Original Get helpTickets for reference only
     // router.get('/helpTickets', requireAuth, asyncHandler(async (req, res) => {
     //     logger.log('info', 'Original get all HelpTickets');
@@ -132,13 +142,13 @@ module.exports = function (app, config) {
         })
     }));
 
-    // get helpTicket Content by helpticket ID
-    router.get('/helpTicketContents/helpTicket:id', requireAuth, asyncHandler(async (req, res) => {
-        let query = HelpTicketContent.find({ helpTicketId: req.params.id });
-        await User.findById(req.params.id).then(result => {
-            res.status(200).json(result);
-        })
-    }));
+    // // get helpTicket Content by helpticket ID
+    // router.get('/helpTicketContents/helpTicket:id', requireAuth, asyncHandler(async (req, res) => {
+    //     let query = HelpTicketContent.find({ helpTicketId: req.params.id });
+    //     await User.findById(req.params.id).then(result => {
+    //         res.status(200).json(result);
+    //     })
+    // }));
 
     // Create helpTicket Content
     router.post('/helpTicketContents', requireAuth, asyncHandler(async (req, res) => {
