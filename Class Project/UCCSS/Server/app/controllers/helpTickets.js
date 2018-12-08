@@ -7,6 +7,8 @@ HelpTicketContent = mongoose.model('HelpTicketContent')
 asyncHandler = require('express-async-handler');
 passportService = require('../../config/passport'),
     passport = require('passport');
+multer = require('multer');
+mkdirp = require('mkdirp');
 
 // need requireAuth but non requireLogin
 var requireAuth = passport.authenticate('jwt', { session: false });
