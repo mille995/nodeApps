@@ -25,7 +25,7 @@
 
                     <!-- table content -->
                     <tbody>
-                        <tr click.trigger="editHelpTicket(helpTicket)" repeat.for="helpTicket of helpTickets.helpTicketsArray">
+                        <tr repeat.for="helpTicket of helpTickets.helpTicketsArray" click.trigger="editHelpTicket(helpTicket)" >
                             <td>${helpTicket.title}</td>
                             <td>${helpTicket.status}</td>
                             <td>${helpTicket.personId.firstname} ${helpTicket.personId.lastname} </td>
