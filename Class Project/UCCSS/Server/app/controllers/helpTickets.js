@@ -17,6 +17,7 @@ module.exports = function (app, config) {
     // get helpTickets
     router.get('/helpTickets', requireAuth, asyncHandler(async (req, res) => {
         logger.log('info', 'Get all helpTickets');
+        console.log(req.params);
         let query = HelpTicket.find();
         query.sort(req.query.order)
             // this joins withh the User model and pull the values for personId and owenerId from it 
@@ -34,10 +35,11 @@ module.exports = function (app, config) {
         })
     }));
 
-    // get helpTickets by user ID -- in process - started from get helpTickets route
-    router.get('/helpTickets/user/:userObj._id', requireAuth, asyncHandler(async (req, res) => {
-        logger.log('info', 'Get helpTickets for logged in user');
-        let query = HelpTicket.find();
+    // get helpTickets by user ID
+    router.get('/helpTickets/user/:userObj', requireAuth, asyncHandler(async (req, res) => {
+        logger.log('info', 'Get all helpTickets');
+        console.log(req.params.userObj);
+        let query = HelpTicket.find({ personId: req.params.userObj });
         query.sort(req.query.order)
             // this joins withh the User model and pull the values for personId and owenerId from it 
             .populate({ path: 'personId', model: 'User', select: 'lastname firstname fullName' })
@@ -85,28 +87,28 @@ module.exports = function (app, config) {
     // create a helpTicket
     router.post('/helpTickets', requireAuth, asyncHandler(async (req, res) => {
         logger.log('info', 'Creating HelpTicket');
-        var helpTicket = new HelpTicket(req.body);
-        const result = await helpTicket.save()
-        // .then(result => {
-        //     req.body.content.helpTicketId = result._id;
-        //     var helpTicketContent = new HelpTicketContent(req.body.content);
-        //     helpTicketContent.save()
-        //         .then(content => {
+        var helpTicket = new HelpTicket(req.body.helpTicket);
+        await helpTicket.save()
+        .then(result => {
+            req.body.content.helpTicketId = result._id;
+            var helpTicketContent = new HelpTicketContent(req.body.content);
+            helpTicketContent.save()
+                .then(content => {
         res.status(201).json(result);
-        //         })
-        // })
-    }));
-
-
-    // Get helpTickets
-    router.get('/helpTickets', requireAuth, asyncHandler(async (req, res) => {
-        logger.log('info', 'Get all HelpTickets');
-        let query = HelpTicket.find();
-        query.sort(req.query.order)
-        await query.exec().then(result => {
-            res.status(200).json(result);
+                })
         })
     }));
+
+
+    // // Original Get helpTickets for reference only
+    // router.get('/helpTickets', requireAuth, asyncHandler(async (req, res) => {
+    //     logger.log('info', 'Original get all HelpTickets');
+    //     let query = HelpTicket.find();
+    //     query.sort(req.query.order)
+    //     await query.exec().then(result => {
+    //         res.status(200).json(result);
+    //     })
+    // }));
 
     // Delete helpTickets
     router.delete('/helpTickets/:id', requireAuth, asyncHandler(async (req, res) => {
@@ -127,7 +129,7 @@ module.exports = function (app, config) {
         })
     }));
 
-    // get helpTicket Content by ID
+    // get helpTicket Content by helpticket ID
     router.get('/helpTicketContents/helpTicket:id', requireAuth, asyncHandler(async (req, res) => {
         let query = HelpTicketContent.find({ helpTicketId: req.params.id });
         await User.findById(req.params.id).then(result => {
@@ -143,31 +145,7 @@ module.exports = function (app, config) {
         res.status(201).json(result);
 
 
-    // Add status requirement
-    router.get('/helpTickets', requireAuth, asyncHandler(async (req, res) => {
-        logger.log('info', 'Get all HelpTickets');
-        let query = HelpTicket.find();
-        query.sort(req.query.order)
-        if (req.query.status) {
-            if (req.query.status[0] == '-') {
-                query.where('status').ne(req.query.status.substring(1));
-            } else {
-                query.where('status').eq(req.query.status);
-            }
-        }
-        await query.exec().then(result => {
-            res.status(200).json(result);
-        })
-    }));
 
-    // Add populate requirement
-    router.get('/helpTickets', requireAuth, asyncHandler(async (req, res) => {
-        logger.log('info', 'Get all HelpTickets');
-        let query = HelpTicket.find();
-        query.sort(req.query.order)
-            .populate({ path: 'personId', model: 'User', select: 'lastName firstName fullName' })
-            .populate({ path: 'ownerId', model: 'User', select: 'lastName firstName fullName' });
-    }));
 
 }));
 

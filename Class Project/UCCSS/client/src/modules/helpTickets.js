@@ -57,7 +57,7 @@ export class HelpTickets {
         personId: this.userObj._id,
         content: ""
         };
-        await this.helpTickets.getHelpTicketsContents(helpTicket._id)
+        await this.helpTickets.getHelpTicketsContent(helpTicket._id)
         this.openEditForm();
     }
 

@@ -7,8 +7,8 @@ export class NavBar {
     constructor(router, auth) {
         this.router = router;
         this.auth = auth;
-        this.loginError = '';
-        this.authenticated = false;
+        this.loginError = "";
+        this.isAuthenticated = false;
         this.email = "";
         this.password = "";
     }
@@ -39,16 +39,15 @@ export class NavBar {
             .catch(error => {
                 console.log(error);
                 this.authenticated = false;
-                this.loginError = "Invalid credentials.";
+                this.loginError = "Invalid credentials";
             });
     };
 
     logout() {
         if (this.userObj) this.auth.logout(this.userObj.email);
-        sessionStorage.removeItem('user');
+        sessionStorage.removeItem("userObj");
         this.isAuthenticated = this.auth.isAuthenticated();
         this.auth.logout();
     }
-
 
 }
