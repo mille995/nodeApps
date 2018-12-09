@@ -146,13 +146,6 @@ module.exports = function (app, config) {
         })
     }));
 
-    // // get helpTicket Content by helpticket ID
-    // router.get('/helpTicketContents/helpTicket:id', requireAuth, asyncHandler(async (req, res) => {
-    //     let query = HelpTicketContent.find({ helpTicketId: req.params.id });
-    //     await User.findById(req.params.id).then(result => {
-    //         res.status(200).json(result);
-    //     })
-    // }));
 
     // Create helpTicket Content
     router.post('/helpTicketContents', requireAuth, asyncHandler(async (req, res) => {
@@ -163,6 +156,7 @@ module.exports = function (app, config) {
 
     }));
 
+    // file upload - creates the storage variable to be used in the file upload and appends date to the filename 
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
             var path = config.uploads + '/helpTickets';
@@ -180,9 +174,10 @@ module.exports = function (app, config) {
         }
     });
 
+    // file upload - has saved file data
     var upload = multer({ storage: storage });
 
-    // create helpticket content with a file
+    // file upload - uploads the file(s) / id is content document ID
     router.post('/helpTicketContents/upload/:id', upload.any(), asyncHandler(async (req, res) => {
         logger.log('info', 'Uploading files');
         await HelpTicketContent.findById(req.params.id).then(result => {
