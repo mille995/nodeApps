@@ -12,6 +12,7 @@
     "aurelia-auth": "^3.0.5",
     "aurelia-bootstrapper": "^2.3.0",
     "aurelia-fetch-client": "^1.6.0",
+    "aurelia-value-converters": "^1.0.6",
     "bluebird": "^3.5.2",
     "cors": "^2.8.5",
     "regenerator-runtime": "^0.13.1",
