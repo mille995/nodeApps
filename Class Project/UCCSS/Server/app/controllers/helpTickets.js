@@ -63,6 +63,10 @@ module.exports = function (app, config) {
         logger.log('info', 'Get helpTicket content for a helpticket');
         console.log(req.params.helpTicketId);
         let query = HelpTicketContent.find({ helpTicketId: req.params.helpTicketId });
+        query.sort(req.query.order)
+            // this joins withh the User model and pull the values for personId and owenerId from it 
+            .populate({ path: 'personId', model: 'User', select: 'lastname firstname' })
+            .populate({ path: 'ownerId', model: 'User', select: 'lastname firstname' });
         await query.exec().then(result => {
             res.status(200).json(result);
         })
