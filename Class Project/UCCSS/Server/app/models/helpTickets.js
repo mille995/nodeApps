@@ -10,8 +10,8 @@ var HelpTicketContentSchema = new Schema({
     content:{type: String},
     dateCreated: {type: Date, default: Date.now},
     file: {
-        filename: {type: String},
-        originalFilename:{type: String},
+        fileName: {type: String},
+        originalFileName:{type: String},
     }
 });
 
