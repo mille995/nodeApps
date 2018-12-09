@@ -14,13 +14,6 @@ export class HelpTickets {
         this.userObj = JSON.parse(sessionStorage.getItem('userObj'));
     }
 
-    // // // slide 4 - Aurelia HelpTickets
-    // constructor(helpTicket){
-    //     this.helpTickets = helpTicket;
-    //     this.showEditForm = false;
-    //     this.userObj = JSON.parse(sessionStorage.getItem('userObj'));
-    //     }
-        
     // activate runs when you first load the page
     async activate() {
         await this.helpTickets.getHelpTickets(this.userObj);
@@ -42,13 +35,20 @@ export class HelpTickets {
         var userId = this.userObj._id
         this.helpTicket = {
             title: "",
-            personId: userId,
+            personId: {_id: userId},
             ownerId: "a1a1a1a1a1a1a1a1a1a1a1a1",
             status: 'new'
         };
         this.helpTicketContent = {
             personId: userId,
+            // helpTicketId: "",
             content: ""
+            // file: {
+            //     fileName:"",
+            //     originalFileName:""
+            // }
+
+             
         };
         this.openEditForm();
     }
@@ -56,6 +56,7 @@ export class HelpTickets {
     openEditForm() {
         this.showEditForm = true;
         setTimeout(() => { $("#title").focus(); }, 500);
+        console.log(this.helpTicket);
         // modified from the class value of firstName
     }
 
@@ -73,8 +74,6 @@ export class HelpTickets {
         this.helpTicket = helpTicket;
         this.save();
     }
-
-
 
     async save() {
         if (this.helpTicket && this.helpTicket.title && this.helpTicketContent && this.helpTicketContent.content) {
@@ -94,8 +93,10 @@ export class HelpTickets {
         this.showEditForm = false;
         this.filesToUpload = new Array();
         this.files = new Array();
+        this.helpTickets.helpTicketsContentsArray =[]
     }
 
+    // add files to the files upload array when the user selects a file
     changeFiles() {
         this.filesToUpload = this.filesToUpload ? this.filesToUpload : new Array();
         for (var i = 0; i < this.files.length; i++) {

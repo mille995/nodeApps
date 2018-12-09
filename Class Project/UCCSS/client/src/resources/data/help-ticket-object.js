@@ -11,6 +11,7 @@ export class HelpTicket {
         this.userObj = JSON.parse(sessionStorage.getItem('userObj'));
     }
 
+    // upload file to a helpticket
     async uploadFile(files, id) {
         await this.data.uploadFiles(files, this.HELP_TICKET_CONTENT_SERVICE + "/upload/" + id);
     }

@@ -23,8 +23,8 @@ module.exports = function (app, config) {
         let query = HelpTicket.find();
         query.sort(req.query.order)
             // this joins withh the User model and pull the values for personId and owenerId from it 
-            .populate({ path: 'personId', model: 'User', select: 'lastname firstname fullName' })
-            .populate({ path: 'ownerId', model: 'User', select: 'lastname firstname fullName' });
+            // .populate({ path: 'personId', model: 'User', select: 'lastname firstname fullName' })
+            // .populate({ path: 'ownerId', model: 'User', select: 'lastname firstname fullName' });
         if (req.query.status) {
             if (req.query.status[0] == '-') {
                 query.where('status').ne(req.query.status.substring(1));
@@ -65,8 +65,8 @@ module.exports = function (app, config) {
         let query = HelpTicketContent.find({ helpTicketId: req.params.helpTicketId });
         query.sort(req.query.order)
             // this joins withh the User model and pull the values for personId and owenerId from it 
-            .populate({ path: 'personId', model: 'User', select: 'lastname firstname' })
-            .populate({ path: 'ownerId', model: 'User', select: 'lastname firstname' });
+            // .populate({ path: 'personId', model: 'User', select: 'lastname firstname' })
+            // .populate({ path: 'ownerId', model: 'User', select: 'lastname firstname' });
         await query.exec().then(result => {
             res.status(200).json(result);
         })
