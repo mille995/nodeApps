@@ -59,9 +59,21 @@ export class HelpTicket {
         }
     }
 
+    // existing helpTicket delete
     async delete(helpTicket) {
         if (helpTicket && helpTicket._id) {
             await this.data.delete(this.HELP_TICKET_SERVICE + '/' + helpTicket._id)
+        }
+    }
+
+    // helpTicket & helpTicketContent delete -- new and not working
+    async deleteHelpTicketAndContent(helpTicket) {
+        console.log('deleting help ticket helpTicket %s', this.helpTicket._id);
+        let serverResponse;
+        if (helpTicket && helpTicket._id) {
+            await this.data.delete(this.HELP_TICKET_SERVICE + '/' + this.helpTicket._id);
+            await this.data.delete(this.HELP_TICKET_CONTENT_SERVICE + '/helpTicket/' + this.helpTicket._id);
+            return serverResponse;
         }
     }
 }
