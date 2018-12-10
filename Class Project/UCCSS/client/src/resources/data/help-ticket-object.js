@@ -67,12 +67,12 @@ export class HelpTicket {
     }
 
     // helpTicket & helpTicketContent delete -- new and not working
-    async deleteHelpTicketAndContent(helpTicket) {
-        console.log('deleting help ticket helpTicket %s', this.helpTicket._id);
+    async deleteHelpTicketAndContent(helpTicketId) {
+        console.log('deleting help ticket helpTicket %s', helpTicketId);
         let serverResponse;
-        if (helpTicket && helpTicket._id) {
-            await this.data.delete(this.HELP_TICKET_SERVICE + '/' + this.helpTicket._id);
-            await this.data.delete(this.HELP_TICKET_CONTENT_SERVICE + '/helpTicket/' + this.helpTicket._id);
+        if (helpTicketId) {
+            await this.data.delete(this.HELP_TICKET_SERVICE + '/' + helpTicketId);
+            await this.data.delete(this.HELP_TICKET_CONTENT_SERVICE + '/helpTicket/' + helpTicketId);
             return serverResponse;
         }
     }
