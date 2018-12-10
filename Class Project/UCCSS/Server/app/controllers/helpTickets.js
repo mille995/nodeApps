@@ -22,9 +22,9 @@ module.exports = function (app, config) {
         console.log(req.params);
         let query = HelpTicket.find();
         query.sort(req.query.order)
-            // this joins withh the User model and pull the values for personId and owenerId from it 
-            // .populate({ path: 'personId', model: 'User', select: 'lastname firstname fullName' })
-            // .populate({ path: 'ownerId', model: 'User', select: 'lastname firstname fullName' });
+        // this joins withh the User model and pull the values for personId and owenerId from it 
+        // .populate({ path: 'personId', model: 'User', select: 'lastname firstname fullName' })
+        // .populate({ path: 'ownerId', model: 'User', select: 'lastname firstname fullName' });
         if (req.query.status) {
             if (req.query.status[0] == '-') {
                 query.where('status').ne(req.query.status.substring(1));
@@ -58,15 +58,15 @@ module.exports = function (app, config) {
         })
     }));
 
-     // get helpTicketContents by helpTicket ID
-     router.get('/helpTicketContents/helpTicket/:helpTicketId', requireAuth, asyncHandler(async (req, res) => {
+    // get helpTicketContents by helpTicket ID
+    router.get('/helpTicketContents/helpTicket/:helpTicketId', requireAuth, asyncHandler(async (req, res) => {
         logger.log('info', 'Get helpTicket content for a helpticket');
         console.log(req.params.helpTicketId);
         let query = HelpTicketContent.find({ helpTicketId: req.params.helpTicketId });
         query.sort(req.query.order)
-            // this joins withh the User model and pull the values for personId and owenerId from it 
-            // .populate({ path: 'personId', model: 'User', select: 'lastname firstname' })
-            // .populate({ path: 'ownerId', model: 'User', select: 'lastname firstname' });
+        // this joins withh the User model and pull the values for personId and owenerId from it 
+        // .populate({ path: 'personId', model: 'User', select: 'lastname firstname' })
+        // .populate({ path: 'ownerId', model: 'User', select: 'lastname firstname' });
         await query.exec().then(result => {
             res.status(200).json(result);
         })
@@ -134,6 +134,17 @@ module.exports = function (app, config) {
             .then(result => {
                 res.status(200).json(result);
             })
+    }));
+
+    // Delete helpTicket Content for a helpTicket -- in process
+
+    router.delete('/helpTicketContents/helpTicket/:helpTicketId', requireAuth, asyncHandler(async (req, res) => {
+        logger.log('info', 'Delete content for helpTicket %s', req.params.helpTicketId);
+        await HelpTicketContent.remove({ helpTicketId: req.params.helpTicketId })
+            .then(result => {
+                res.status(200).json(result);
+            })
+
     }));
 
     // get helpTicket Content
