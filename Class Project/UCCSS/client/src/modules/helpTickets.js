@@ -32,6 +32,7 @@ export class HelpTickets {
     }
 
     async deleteHelpTicketAndContent() {
+        this.helpTicket = helpTicket
         await this.helpTickets.deleteHelpTicketAndContent(helpTicket._id);
     }
 
