@@ -31,6 +31,10 @@ export class HelpTickets {
         await this.helpTickets.getHelpTicketContent();
     }
 
+    async deleteHelpTicketAndContent() {
+        await this.helpTickets.deleteHelpTicketAndContent(helpTicket._id);
+    }
+
     newHelpTicket() {
         var userId = this.userObj._id
         this.helpTicket = {
