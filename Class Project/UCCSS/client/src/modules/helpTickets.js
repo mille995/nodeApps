@@ -42,22 +42,14 @@ export class HelpTickets {
         var userId = this.userObj._id
         this.helpTicket = {
             title: "",
-            ownerId: {_id: ownerId},
+            ownerId: {_id: "a1a1a1a1a1a1a1a1a1a1a1a1"},
             personId: {_id: userId},
-          //  ownerId: "a1a1a1a1a1a1a1a1a1a1a1a1",
-           // ownerId: "",
             status: 'new'
         };
         this.helpTicketContent = {
             personId: userId,
-            // helpTicketId: "",
             content: ""
-            // file: {
-            //     fileName:"",
-            //     originalFileName:""
-            // }
-
-             
+      
         };
         this.openEditForm();
     }
