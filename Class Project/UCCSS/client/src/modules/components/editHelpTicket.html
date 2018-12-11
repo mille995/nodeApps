@@ -18,9 +18,18 @@
                     <input type="text" readonly.bind="helpTicket._id" class="form-control" value.bind="helpTicket.title"
                         id="title" placeholder="Title">
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="status">Status</label>
                     <input type="text" class="form-control" value.bind="helpTicket.status" id="status" placeholder="Status">
+                </div> -->
+
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select value.bind="helpTicket.status" class="form-control" id="status">
+                        <option value="new">New</option>
+                        <option value="inProcess">In Process</option>
+                        <option value="closed">Closed</option>
+                    </select>
                 </div>
                 
                 <div class="form-group">
