@@ -1,0 +1,41 @@
+<template>
+
+    <!-- set to 8 columns of 12 to not use the whole page -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+
+                <!-- toolbar at the top of the form -->
+                <div class="list-group-item">
+                    <span click.trigger="back()"><i data-feather="arrow-left-circle"></i></span>
+                    <span click.trigger="save()" style="margin-left:5px;"><i data-feather="save"></i></span>
+                    <span show.bind="todo._id" click.trigger="delete()"><i data-feather="trash-2"></i></span>
+                </div>
+
+                <!-- edit todo form -->
+                <div class="form-group" style="margin-top:20px;">
+                    <label for="todo">Todo</label>
+                    <input type="text" class="form-control" value.bind="todo.todo" id="todo" placeholder="enter a todo">
+                </div>
+
+                <div class="form-group">
+                    <label for="priotity" value.bind="foo.priotity">Priority</label>
+                    <select value.bind="todo.priotity" value="High" class="form-control" id="role" >
+                        <option value="" selected disabled hidden>Choose here</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" checked.bind="todo.done" type="checkbox" checked="false" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Done
+                    </label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</template>

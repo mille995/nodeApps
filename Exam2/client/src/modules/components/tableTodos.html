@@ -9,24 +9,26 @@
                         <!-- toolbar at the top of the table -->
                         <tr>
                             <th colspan="4">
-                                <span click.trigger="newFoo()"><i data-feather="plus"></i></span>
-                                <span click.trigger="getFoos()" style="margin-left:5px;"><i data-feather="refresh-cw"></i></span>
+                                <span click.trigger="newTodo()"><i data-feather="plus"></i></span>
+                                <span click.trigger="getTodos()" style="margin-left:5px;"><i data-feather="refresh-cw"></i></span>
                             </th>
                         </tr>
 
                         <!-- table headings -->
                         <tr>
-                            <th scope="col">Foo</th>
-                            <th scope="col">Woo</th>
+                            <th scope="col">Todo</th>
+                            <th scope="col">Priority</th>
+                            <th scope="col">done</th>
   
                         </tr>
                     </thead>
 
                     <!-- table content -->
                     <tbody>
-                        <tr repeat.for="foo of foos.foosArray">
-                            <td click.trigger="editFoo(foo)">${foo.foo}</td>
-                            <td click.trigger="editFoo(foo)">${foo.woo}</td>
+                        <tr repeat.for="todo of todos.todosArray">
+                            <td click.trigger="editTodo(todo)">${todo.todo}</td>
+                            <td click.trigger="editTodo(todo)">${todo.priotity}</td>
+                            <td click.trigger="editTodo(todo)">${todo.done}</td>
                             <td>
                             </td>
                         </tr>
